@@ -24,6 +24,17 @@
   }
 }
 
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes zoomSlow {
   0%, 100% {
     transform: scale(1);
@@ -39,6 +50,21 @@
   }
   50% {
     transform: translateY(-20px);
+  }
+}
+
+@keyframes blob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(20px, -50px) scale(1.1);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  75% {
+    transform: translate(50px, 50px) scale(1.05);
   }
 }
 
@@ -73,6 +99,15 @@
   }
 }
 
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .animate-fadeInUp {
   animation: fadeInUp 0.8s ease-out forwards;
 }
@@ -89,8 +124,20 @@
   animation-delay: 600ms;
 }
 
+.animation-delay-2000 {
+  animation-delay: 2000ms;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4000ms;
+}
+
 .animate-slideDown {
   animation: slideDown 0.4s ease-out forwards;
+}
+
+.animate-slideInFromTop {
+  animation: slideInFromTop 0.8s ease-out forwards;
 }
 
 .animate-zoomSlow {
@@ -99,6 +146,10 @@
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
 }
 
 .animate-slideInFromLeft {
@@ -113,10 +164,28 @@
   animation: pulse-glow 2s infinite;
 }
 
+.animate-spin-slow {
+  animation: spin-slow 6s linear infinite;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
   scroll-behavior: smooth;
+}
+
+@layer components {
+  .btn-group-hover {
+    @apply transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply transition-all duration-500 transform;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+  }
 }

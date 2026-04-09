@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, ChevronLeft, ChevronRight, MapPin, Phone, Mail, Leaf } from 'lucide-react';
+import { Menu, X, ChevronLeft, ChevronRight, MapPin, Phone, Mail, Leaf, Award, Users, Utensils, Waves } from 'lucide-react';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -70,6 +70,13 @@ function App() {
     { emoji: '🏊', title: 'Lifeguard', phone: '+91 8521745856' },
   ];
 
+  const features = [
+    { icon: Utensils, title: 'Fine Dining', desc: 'Multi-cuisine culinary excellence' },
+    { icon: Waves, title: 'Pool & Spa', desc: 'Aquatic recreational facilities' },
+    { icon: Users, title: 'Events', desc: 'Complete event management' },
+    { icon: Award, title: 'Premium Service', desc: 'World-class hospitality' },
+  ];
+
   const nextSlide = () => setActiveSlide((prev) => (prev + 1) % slides.length);
   const prevSlide = () => setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
@@ -77,28 +84,30 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-white/80 backdrop-blur-sm'}`}>
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-gradient-to-r from-green-700 to-emerald-600 shadow-2xl' : 'bg-gradient-to-r from-green-600/90 to-emerald-500/90 backdrop-blur-md'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2 group cursor-pointer">
-              <Leaf className="h-8 w-8 text-emerald-600 group-hover:rotate-12 transition-transform" />
-              <span className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Bageecha</span>
+            <div className="flex items-center space-x-3 group cursor-pointer">
+              <div className="relative animate-spin-slow">
+                <Leaf className="h-9 w-9 text-white group-hover:text-lime-200 transition-colors" />
+              </div>
+              <span className="text-2xl font-bold text-white drop-shadow-lg">Bageecha Resort</span>
             </div>
-            <div className="hidden md:flex space-x-8">
+            <div className="hidden md:flex space-x-1">
               {['Home', 'About', 'Menu', 'Events', 'Careers', 'Contact'].map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} className="text-gray-700 hover:text-emerald-600 transition-colors font-medium">
+                <a key={item} href={`#${item.toLowerCase()}`} className="text-white/90 hover:text-white px-4 py-2 rounded-lg transition-all duration-300 hover:bg-white/20 font-medium">
                   {item}
                 </a>
               ))}
             </div>
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden">
-              {isMenuOpen ? <X /> : <Menu />}
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden text-white hover:bg-white/20 p-2 rounded-lg transition-all">
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
           {isMenuOpen && (
             <div className="md:hidden pb-4 space-y-2 animate-slideDown">
               {['Home', 'About', 'Menu', 'Events', 'Careers', 'Contact'].map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} className="block text-gray-700 hover:text-emerald-600 py-2">
+                <a key={item} href={`#${item.toLowerCase()}`} className="block text-white/90 hover:text-white py-2 px-4 rounded-lg hover:bg-white/10 transition-all">
                   {item}
                 </a>
               ))}
@@ -107,39 +116,63 @@ function App() {
         </div>
       </nav>
 
-      <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-emerald-50 via-white to-teal-50 pt-16 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1585325/pexels-photo-1585325.jpeg?auto=compress&cs=tinysrgb&w=1920')] bg-cover bg-center opacity-20 animate-zoomSlow"></div>
-        <div className="relative max-w-5xl mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 animate-fadeInUp">
-            Welcome to <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Bageecha Resort</span>
+      <section id="home" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 pt-16 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-green-300 opacity-20 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-teal-300 opacity-20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+          <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-emerald-300 opacity-20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+        </div>
+        <div className="relative max-w-5xl mx-auto px-4 text-center z-10">
+          <div className="mb-6 animate-slideInFromTop">
+            <span className="inline-block px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 rounded-full text-sm font-semibold">Welcome to Paradise</span>
+          </div>
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 animate-fadeInUp leading-tight">
+            <span className="bg-gradient-to-r from-green-700 via-emerald-600 to-teal-600 bg-clip-text text-transparent">Bageecha Resort</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-4 animate-fadeInUp animation-delay-200">
-            Your Perfect Destination for Relaxation, Dining & Celebrations
+          <p className="text-xl md:text-2xl text-green-800 mb-4 animate-fadeInUp animation-delay-200 font-light">
+            Where Nature Meets Luxury
           </p>
-          <p className="text-lg text-gray-500 mb-8 animate-fadeInUp animation-delay-400">
-            Located in Sitamarhi, Bihar – Where Nature Meets Hospitality
+          <p className="text-lg text-green-700 mb-10 animate-fadeInUp animation-delay-400">
+            Escape to Tranquility in the Heart of Sitamarhi, Bihar
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fadeInUp animation-delay-600">
-            <a href="#about" className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl transition-all transform hover:scale-105">
-              Explore Now
+            <a href="#about" className="group relative bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-full text-lg font-semibold overflow-hidden transition-all duration-500 hover:shadow-2xl hover:scale-105">
+              <span className="relative z-10">Explore Now</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-teal-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </a>
-            <a href="#contact" className="border-2 border-emerald-600 text-emerald-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-emerald-50 transition-all">
-              Get Directions
+            <a href="#contact" className="group border-2 border-green-600 text-green-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-50 transition-all duration-500 hover:shadow-lg">
+              Get in Touch
             </a>
+          </div>
+          <div className="mt-12 flex items-center justify-center space-x-2 text-green-700 animate-bounce">
+            <MapPin className="h-5 w-5" />
+            <p className="text-sm md:text-base font-medium">Madhuban Goushala Road, Sitamarhi, Bihar</p>
           </div>
         </div>
       </section>
 
-      <section id="about" data-animate className={`py-20 bg-white transition-all duration-1000 ${animationClass('about')}`}>
+      <section id="about" data-animate className={`py-24 bg-white relative overflow-hidden transition-all duration-1000 ${animationClass('about')}`}>
+        <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-green-200 to-emerald-200"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">About Us</h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 mx-auto"></div>
+          <div className="text-center mb-20 animate-fadeInUp">
+            <span className="inline-block px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 rounded-full text-sm font-semibold mb-4">DISCOVER</span>
+            <h2 className="text-5xl md:text-6xl font-bold text-green-900 mb-6">About Bageecha Resort</h2>
+            <p className="text-lg text-green-700 max-w-2xl mx-auto leading-relaxed">Your perfect destination for relaxation, dining, and celebrations in a natural and refreshing atmosphere</p>
           </div>
-          <p className="text-lg text-gray-700 mb-8 text-center max-w-3xl mx-auto leading-relaxed">
-            Welcome to Bageecha Resort, Sitamarhi, Bihar – your perfect destination for relaxation, dining, and celebrations in a natural and refreshing atmosphere.
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {features.map((feature, idx) => {
+              const Icon = feature.icon;
+              return (
+                <div key={idx} className="group relative p-8 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-green-100 hover:border-green-300" style={{ animationDelay: `${idx * 100}ms` }}>
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-400 to-emerald-400 opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-500"></div>
+                  <Icon className="h-12 w-12 text-green-600 mb-4 group-hover:text-emerald-600 group-hover:scale-110 transition-all duration-500" />
+                  <h3 className="text-xl font-bold text-green-900 mb-2">{feature.title}</h3>
+                  <p className="text-green-700">{feature.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { emoji: '🍽️', title: 'Multi-cuisine Restaurant', desc: 'Delicious cuisines prepared by expert chefs' },
               { emoji: '🏊', title: 'Swimming Pool Facility', desc: 'Cool off and relax in our modern pool' },
@@ -148,77 +181,90 @@ function App() {
               { emoji: '🎉', title: 'Event Arrangements', desc: 'Full customized event management' },
               { emoji: '🌿', title: 'Natural Ambiance', desc: 'Serene atmosphere in nature' },
             ].map((item, idx) => (
-              <div key={idx} className="group p-8 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl hover:shadow-xl transition-all transform hover:-translate-y-2 hover:from-emerald-100 hover:to-teal-100" style={{ animationDelay: `${idx * 100}ms` }}>
-                <div className="text-5xl mb-4 group-hover:scale-125 transition-transform">{item.emoji}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-600">{item.desc}</p>
+              <div key={idx} className="group p-8 bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl hover:shadow-xl hover:from-green-100 hover:to-emerald-100 transition-all duration-500 transform hover:-translate-y-2 border border-green-100 hover:border-green-400" style={{ animationDelay: `${idx * 80}ms` }}>
+                <div className="text-6xl mb-4 group-hover:scale-125 transition-transform duration-500 inline-block">{item.emoji}</div>
+                <h3 className="text-xl font-bold text-green-900 mb-2">{item.title}</h3>
+                <p className="text-green-700">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-br from-emerald-50 to-teal-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center">Our Highlights</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 mx-auto mb-16"></div>
+      <section className="py-24 bg-gradient-to-b from-green-50 to-emerald-50 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 right-10 w-40 h-40 bg-green-300 rounded-full mix-blend-multiply filter blur-2xl animate-float"></div>
+          <div className="absolute bottom-10 left-10 w-40 h-40 bg-emerald-300 rounded-full mix-blend-multiply filter blur-2xl animate-float animation-delay-2000"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <h2 className="text-5xl md:text-6xl font-bold text-center text-green-900 mb-6 animate-fadeInUp">Our Highlights</h2>
+          <p className="text-center text-green-700 text-lg mb-16 max-w-2xl mx-auto">Experience the finest amenities and services at Bageecha Resort</p>
           <div className="relative">
-            <div className="overflow-hidden rounded-2xl bg-white shadow-2xl">
-              <div className="flex transition-all duration-500" style={{ transform: `translateX(-${activeSlide * 100}%)` }}>
+            <div className="overflow-hidden rounded-3xl bg-white shadow-2xl border-2 border-green-200">
+              <div className="flex transition-all duration-700 ease-out" style={{ transform: `translateX(-${activeSlide * 100}%)` }}>
                 {slides.map((slide, idx) => (
-                  <div key={idx} className="min-w-full p-12 md:p-20 text-center">
-                    <div className="text-7xl mb-6 animate-bounce">{slide.icon}</div>
-                    <h3 className="text-3xl font-bold text-gray-900 mb-4">{slide.title}</h3>
-                    <p className="text-xl text-gray-600">{slide.desc}</p>
+                  <div key={idx} className="min-w-full p-12 md:p-24 text-center bg-gradient-to-br from-green-50 to-emerald-50">
+                    <div className="text-9xl mb-8 animate-bounce inline-block">{slide.icon}</div>
+                    <h3 className="text-4xl font-bold text-green-900 mb-4">{slide.title}</h3>
+                    <p className="text-xl text-green-700 max-w-xl mx-auto">{slide.desc}</p>
                   </div>
                 ))}
               </div>
             </div>
-            <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 bg-emerald-600 text-white p-3 rounded-full hover:bg-emerald-700 transition-all transform hover:scale-110">
-              <ChevronLeft size={24} />
+            <button onClick={prevSlide} className="absolute left-6 top-1/2 -translate-y-1/2 bg-gradient-to-r from-green-600 to-emerald-600 text-white p-4 rounded-full hover:bg-green-700 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-2xl z-10 group">
+              <ChevronLeft size={28} className="group-hover:-translate-x-1 transition-transform" />
             </button>
-            <button onClick={nextSlide} className="absolute right-4 top-1/2 -translate-y-1/2 bg-emerald-600 text-white p-3 rounded-full hover:bg-emerald-700 transition-all transform hover:scale-110">
-              <ChevronRight size={24} />
+            <button onClick={nextSlide} className="absolute right-6 top-1/2 -translate-y-1/2 bg-gradient-to-r from-green-600 to-emerald-600 text-white p-4 rounded-full hover:bg-green-700 transition-all duration-300 transform hover:scale-110 shadow-lg hover:shadow-2xl z-10 group">
+              <ChevronRight size={28} className="group-hover:translate-x-1 transition-transform" />
             </button>
-            <div className="flex justify-center gap-2 mt-8">
+            <div className="flex justify-center gap-3 mt-10">
               {slides.map((_, idx) => (
-                <button key={idx} onClick={() => setActiveSlide(idx)} className={`h-3 rounded-full transition-all ${activeSlide === idx ? 'bg-emerald-600 w-8' : 'bg-gray-300 w-3'}`} />
+                <button key={idx} onClick={() => setActiveSlide(idx)} className={`h-3 rounded-full transition-all duration-500 ${activeSlide === idx ? 'bg-gradient-to-r from-green-600 to-emerald-600 w-10' : 'bg-green-300 w-3 hover:bg-green-400'}`} />
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section id="events" data-animate className={`py-20 bg-white transition-all duration-1000 ${animationClass('events')}`}>
+      <section id="events" data-animate className={`py-24 bg-white transition-all duration-1000 ${animationClass('events')}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center">Events & Celebrations</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 mx-auto mb-16"></div>
+          <div className="text-center mb-20">
+            <span className="inline-block px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 rounded-full text-sm font-semibold mb-4">CELEBRATE</span>
+            <h2 className="text-5xl md:text-6xl font-bold text-green-900 mb-6">Events & Celebrations</h2>
+            <p className="text-lg text-green-700 max-w-2xl mx-auto">Make your special moments unforgettable with our comprehensive event services</p>
+          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {events.map((event, idx) => (
-              <div key={idx} className="group p-8 bg-gradient-to-br from-white to-emerald-50 border-2 border-emerald-200 rounded-2xl hover:border-emerald-600 hover:shadow-xl transition-all transform hover:-translate-y-2 cursor-pointer" style={{ animationDelay: `${idx * 150}ms` }}>
-                <div className="text-5xl mb-4 group-hover:scale-125 transition-transform duration-300">{event.emoji}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{event.title}</h3>
-                <p className="text-gray-600">{event.desc}</p>
+              <div key={idx} className="group relative p-8 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-2xl hover:border-green-500 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 overflow-hidden cursor-pointer" style={{ animationDelay: `${idx * 100}ms` }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-emerald-600 opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
+                <div className="relative z-10">
+                  <div className="text-6xl mb-4 group-hover:scale-125 transition-transform duration-500 inline-block">{event.emoji}</div>
+                  <h3 className="text-2xl font-bold text-green-900 mb-2">{event.title}</h3>
+                  <p className="text-green-700">{event.desc}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="menu" data-animate className={`py-20 bg-gradient-to-br from-emerald-50 to-teal-50 transition-all duration-1000 ${animationClass('menu')}`}>
+      <section id="menu" data-animate className={`py-24 bg-gradient-to-b from-green-50 to-emerald-50 transition-all duration-1000 ${animationClass('menu')}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center">Our Menu</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 mx-auto mb-4 text-center"></div>
-          <p className="text-center text-gray-600 mb-16 text-lg">Enjoy a wide variety of delicious cuisines prepared by experienced chefs</p>
+          <div className="text-center mb-20">
+            <span className="inline-block px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 rounded-full text-sm font-semibold mb-4">CULINARY</span>
+            <h2 className="text-5xl md:text-6xl font-bold text-green-900 mb-6">Our Menu</h2>
+            <p className="text-lg text-green-700 max-w-2xl mx-auto">Enjoy a wide variety of delicious cuisines prepared by experienced chefs</p>
+          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {menuItems.map((menu, idx) => (
-              <div key={idx} className="group p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2" style={{ animationDelay: `${idx * 100}ms` }}>
-                <h3 className="text-2xl font-bold text-emerald-600 mb-6 group-hover:text-teal-600 transition-colors">{menu.category}</h3>
+              <div key={idx} className="group p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-green-100 hover:border-green-400 overflow-hidden relative" style={{ animationDelay: `${idx * 80}ms` }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-emerald-600 opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-6 group-hover:from-emerald-600 group-hover:to-teal-600 transition-all">{menu.category}</h3>
                 <ul className="space-y-3">
                   {menu.items.map((item, itemIdx) => (
-                    <li key={itemIdx} className="text-gray-700 flex items-start">
-                      <span className="inline-block w-2 h-2 bg-emerald-600 rounded-full mr-3 mt-2 group-hover:bg-teal-600 transition-colors"></span>
-                      <span className="group-hover:text-emerald-600 transition-colors">{item}</span>
+                    <li key={itemIdx} className="text-green-800 flex items-start group/item">
+                      <span className="inline-block w-2 h-2 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full mr-3 mt-2 group-hover/item:from-emerald-600 group-hover/item:to-teal-600 transition-all group-hover/item:scale-150"></span>
+                      <span className="group-hover/item:text-green-900 transition-colors">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -228,65 +274,76 @@ function App() {
         </div>
       </section>
 
-      <section id="careers" data-animate className={`py-20 bg-white transition-all duration-1000 ${animationClass('careers')}`}>
+      <section id="careers" data-animate className={`py-24 bg-white transition-all duration-1000 ${animationClass('careers')}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center">Join Our Team</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 mx-auto mb-16"></div>
-          <p className="text-center text-gray-600 mb-16 text-lg">We are currently hiring passionate hospitality professionals</p>
+          <div className="text-center mb-20">
+            <span className="inline-block px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 rounded-full text-sm font-semibold mb-4">CAREERS</span>
+            <h2 className="text-5xl md:text-6xl font-bold text-green-900 mb-6">Join Our Team</h2>
+            <p className="text-lg text-green-700 max-w-2xl mx-auto">We are currently hiring passionate hospitality professionals</p>
+          </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {careers.map((job, idx) => (
-              <a key={idx} href={`tel:${job.phone.replace(/\D/g, '')}`} className="group p-8 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl hover:shadow-xl hover:from-emerald-100 hover:to-teal-100 transition-all transform hover:-translate-y-2 cursor-pointer">
-                <div className="text-5xl mb-4 group-hover:scale-125 transition-transform">{job.emoji}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{job.title}</h3>
-                <p className="text-emerald-600 font-semibold group-hover:text-teal-600 transition-colors">{job.phone}</p>
+              <a key={idx} href={`tel:${job.phone.replace(/\D/g, '')}`} className="group p-8 bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl hover:shadow-2xl hover:from-green-100 hover:to-emerald-100 transition-all duration-500 transform hover:-translate-y-3 cursor-pointer border border-green-100 hover:border-green-400 overflow-hidden relative" style={{ animationDelay: `${idx * 100}ms` }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-green-600 to-emerald-600 opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
+                <div className="relative z-10">
+                  <div className="text-6xl mb-4 group-hover:scale-125 transition-transform duration-500 inline-block">{job.emoji}</div>
+                  <h3 className="text-2xl font-bold text-green-900 mb-4">{job.title}</h3>
+                  <p className="text-lg font-semibold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent group-hover:from-emerald-600 group-hover:to-teal-600 transition-all">{job.phone}</p>
+                </div>
               </a>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="contact" data-animate className={`py-20 bg-gradient-to-br from-emerald-50 to-teal-50 transition-all duration-1000 ${animationClass('contact')}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center">Inquiry & Reservations</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-emerald-600 to-teal-600 mx-auto mb-16"></div>
+      <section id="contact" data-animate className={`py-24 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 transition-all duration-1000 relative overflow-hidden ${animationClass('contact')}`}>
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 right-20 w-64 h-64 bg-green-300 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-20">
+            <span className="inline-block px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 rounded-full text-sm font-semibold mb-4">CONTACT</span>
+            <h2 className="text-5xl md:text-6xl font-bold text-green-900 mb-6">Get In Touch</h2>
+            <p className="text-lg text-green-700 max-w-2xl mx-auto">We're here to help and answer any questions you might have</p>
+          </div>
           <div className="grid md:grid-cols-2 gap-12">
             <div className="space-y-8">
-              <div className="flex items-start space-x-4 group">
-                <div className="w-16 h-16 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                  <Phone className="h-8 w-8 text-white" />
+              <div className="group flex items-start space-x-6 p-6 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-green-100 hover:border-green-400">
+                <div className="w-20 h-20 bg-gradient-to-br from-green-600 to-emerald-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                  <Phone className="h-10 w-10 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Phone / WhatsApp</h3>
-                  <p className="text-lg text-emerald-600 font-semibold hover:text-teal-600"><a href="tel:+917277653665">+91 7277653665</a></p>
-                  <p className="text-lg text-emerald-600 font-semibold hover:text-teal-600"><a href="tel:+919430449128">+91 9430449128</a></p>
+                  <h3 className="text-2xl font-bold text-green-900 mb-2">Phone / WhatsApp</h3>
+                  <p className="text-lg font-semibold text-green-600 hover:text-emerald-600 transition-colors"><a href="tel:+917277653665">+91 7277653665</a></p>
+                  <p className="text-lg font-semibold text-green-600 hover:text-emerald-600 transition-colors"><a href="tel:+919430449128">+91 9430449128</a></p>
                 </div>
               </div>
-              <div className="flex items-start space-x-4 group">
-                <div className="w-16 h-16 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                  <MapPin className="h-8 w-8 text-white" />
+              <div className="group flex items-start space-x-6 p-6 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-green-100 hover:border-green-400">
+                <div className="w-20 h-20 bg-gradient-to-br from-green-600 to-emerald-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                  <MapPin className="h-10 w-10 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Address</h3>
-                  <p className="text-gray-600">Madhuban Goushala Road<br />Near Parori Pool, Sitamarhi<br />Dumra, Bihar - Ward No 21</p>
+                  <h3 className="text-2xl font-bold text-green-900 mb-2">Address</h3>
+                  <p className="text-green-700 leading-relaxed">Madhuban Goushala Road<br />Near Parori Pool, Sitamarhi<br />Dumra, Bihar - Ward No 21</p>
                 </div>
               </div>
-              <div className="flex items-start space-x-4 group">
-                <div className="w-16 h-16 bg-gradient-to-br from-emerald-600 to-teal-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
-                  <Mail className="h-8 w-8 text-white" />
+              <div className="group flex items-start space-x-6 p-6 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-green-100 hover:border-green-400">
+                <div className="w-20 h-20 bg-gradient-to-br from-green-600 to-emerald-600 rounded-full flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                  <Mail className="h-10 w-10 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">Email</h3>
-                  <p className="text-gray-600">info@bageecha-resort.com</p>
+                  <h3 className="text-2xl font-bold text-green-900 mb-2">Email</h3>
+                  <p className="text-green-700">info@bageecha-resort.com</p>
                 </div>
               </div>
             </div>
             <div>
-              <form className="space-y-6 bg-white p-8 rounded-2xl shadow-lg">
-                <input type="text" placeholder="Your Name" className="w-full px-4 py-3 border-2 border-emerald-200 rounded-lg focus:border-emerald-600 focus:outline-none transition-colors" />
-                <input type="email" placeholder="Your Email" className="w-full px-4 py-3 border-2 border-emerald-200 rounded-lg focus:border-emerald-600 focus:outline-none transition-colors" />
-                <input type="tel" placeholder="Your Phone" className="w-full px-4 py-3 border-2 border-emerald-200 rounded-lg focus:border-emerald-600 focus:outline-none transition-colors" />
-                <textarea placeholder="Your Message" rows={4} className="w-full px-4 py-3 border-2 border-emerald-200 rounded-lg focus:border-emerald-600 focus:outline-none transition-colors" />
-                <button type="submit" className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-4 rounded-lg font-semibold hover:shadow-xl transition-all transform hover:scale-105">
+              <form className="space-y-6 bg-white p-8 rounded-2xl shadow-2xl border border-green-100">
+                <input type="text" placeholder="Your Name" className="w-full px-6 py-4 border-2 border-green-200 rounded-lg focus:border-green-600 focus:outline-none transition-all duration-300 focus:shadow-lg text-green-900 placeholder-green-400" />
+                <input type="email" placeholder="Your Email" className="w-full px-6 py-4 border-2 border-green-200 rounded-lg focus:border-green-600 focus:outline-none transition-all duration-300 focus:shadow-lg text-green-900 placeholder-green-400" />
+                <input type="tel" placeholder="Your Phone" className="w-full px-6 py-4 border-2 border-green-200 rounded-lg focus:border-green-600 focus:outline-none transition-all duration-300 focus:shadow-lg text-green-900 placeholder-green-400" />
+                <textarea placeholder="Your Message" rows={4} className="w-full px-6 py-4 border-2 border-green-200 rounded-lg focus:border-green-600 focus:outline-none transition-all duration-300 focus:shadow-lg text-green-900 placeholder-green-400 resize-none" />
+                <button type="submit" className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-4 rounded-lg font-bold text-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:from-green-700 hover:to-emerald-700">
                   Send Message
                 </button>
               </form>
@@ -295,34 +352,37 @@ function App() {
         </div>
       </section>
 
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <Leaf className="h-8 w-8 text-emerald-500" />
-                <span className="text-2xl font-bold">Bageecha Resort</span>
+      <footer className="bg-gradient-to-b from-green-900 via-emerald-900 to-green-950 text-white py-16 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-green-400 rounded-full mix-blend-multiply filter blur-3xl"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid md:grid-cols-3 gap-12 mb-12">
+            <div className="group animate-fadeInUp">
+              <div className="flex items-center space-x-3 mb-4">
+                <Leaf className="h-10 w-10 text-lime-300 group-hover:rotate-12 transition-transform duration-500" />
+                <span className="text-3xl font-bold">Bageecha Resort</span>
               </div>
-              <p className="text-gray-400">Your perfect destination for relaxation, dining, and celebrations in Sitamarhi, Bihar.</p>
+              <p className="text-green-100 leading-relaxed">Your perfect destination for relaxation, dining, and celebrations in Sitamarhi, Bihar.</p>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-              <ul className="space-y-2">
+            <div className="animate-fadeInUp animation-delay-200">
+              <h3 className="text-xl font-bold mb-6 text-lime-300">Quick Links</h3>
+              <ul className="space-y-3">
                 {['Home', 'About', 'Menu', 'Events', 'Careers', 'Contact'].map((item) => (
-                  <li key={item}><a href={`#${item.toLowerCase()}`} className="text-gray-400 hover:text-emerald-500 transition-colors">{item}</a></li>
+                  <li key={item}><a href={`#${item.toLowerCase()}`} className="text-green-100 hover:text-lime-300 transition-all duration-300 hover:translate-x-2 inline-block">{item}</a></li>
                 ))}
               </ul>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-4">Contact</h3>
-              <p className="text-gray-400">+91 7277653665</p>
-              <p className="text-gray-400">+91 9430449128</p>
-              <p className="text-gray-400 text-sm mt-2">Sitamarhi, Bihar</p>
+            <div className="animate-fadeInUp animation-delay-400">
+              <h3 className="text-xl font-bold mb-6 text-lime-300">Contact Info</h3>
+              <p className="text-green-100 mb-2">+91 7277653665</p>
+              <p className="text-green-100 mb-2">+91 9430449128</p>
+              <p className="text-green-100 text-sm">Sitamarhi, Bihar</p>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p className="mb-2">&copy; 2024 Bageecha Resort. All rights reserved.</p>
-            <p>Developed by <a href="https://snhrsolution.com" target="_blank" rel="noopener noreferrer" className="text-emerald-500 hover:text-emerald-400 transition-colors font-semibold">S.N HR Solution</a></p>
+          <div className="border-t border-green-700 pt-8 text-center">
+            <p className="text-green-200 mb-3">&copy; 2024 Bageecha Resort. All rights reserved.</p>
+            <p className="text-green-200">Developed by <a href="https://snhrsolution.com" target="_blank" rel="noopener noreferrer" className="text-lime-300 hover:text-white transition-colors font-bold hover:underline">S.N HR Solution</a></p>
           </div>
         </div>
       </footer>
